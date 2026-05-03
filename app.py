@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from models import db, ChatMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_nvidia_ai_endpoints import ChatNVIDIA
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.messages import HumanMessage, AIMessage
 import uuid
@@ -33,11 +34,16 @@ with app.app_context():
 
 # LangChain Setup
 def get_ai_chain():
-    api_key = os.getenv("GOOGLE_API_KEY")
-    if not api_key or api_key == "your_google_api_key_here":
-        raise ValueError("Missing GOOGLE_API_KEY in .env file")
+    google_key = os.getenv("GOOGLE_API_KEY")
+    nvidia_key = os.getenv("NVIDIA_API_KEY")
     
-    llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", google_api_key=api_key)
+    # Prioritize NVIDIA if key is available
+    if nvidia_key and nvidia_key != "your_nvidia_api_key_here":
+        llm = ChatNVIDIA(model="meta/llama-3.1-405b-instruct", nvidia_api_key=nvidia_key)
+    elif google_key and google_key != "your_google_api_key_here":
+        llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", google_api_key=google_key)
+    else:
+        raise ValueError("Missing both GOOGLE_API_KEY and NVIDIA_API_KEY in .env file")
     
     # Using Jinja2 syntax in LangChain ChatPromptTemplate
     template = """
