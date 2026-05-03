@@ -113,4 +113,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         userInput.focus();
     }
+
+    const sendBtn = document.getElementById('send-btn');
+    if (sendBtn) {
+        sendBtn.addEventListener('click', sendMessage);
+    }
 });
