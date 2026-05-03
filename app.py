@@ -4,8 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from models import db, ChatMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain.prompts import ChatPromptTemplate
-from langchain.schema import HumanMessage, AIMessage
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.messages import HumanMessage, AIMessage
 import uuid
 
 # Load environment variables
