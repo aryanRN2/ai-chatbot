@@ -12,7 +12,16 @@ import uuid
 load_dotenv()
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///chat_history.db')
+# Configure Database for Vercel (read-only filesystem)
+db_url = os.getenv('DATABASE_URL')
+if not db_url:
+    # If on Vercel and no external DB, use /tmp for SQLite
+    if os.getenv('VERCEL'):
+        db_url = 'sqlite:////tmp/chat_history.db'
+    else:
+        db_url = 'sqlite:///chat_history.db'
+
+app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.getenv('FLASK_SECRET_KEY', 'default_secret_key')
 
