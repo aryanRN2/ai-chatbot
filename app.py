@@ -99,4 +99,10 @@ def chat():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True,port = 5001)
+    # When running locally
+    app.run(debug=True, port=5001)
+else:
+    # When running on Vercel/Production
+    # Ensure tables are created (optional but helpful for first run)
+    with app.app_context():
+        db.create_all()
