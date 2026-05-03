@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aryan Ai | RN-ai</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body data-mode="{{ mode }}">
+    <canvas id="glow-canvas"></canvas>
+
+    <nav>
+        <div class="nav-left">
+            <div class="nav-links">
+                <a href="https://placement-project-delta.vercel.app/source" target="_blank">About Me</a>
+            </div>
+        </div>
+        <div class="nav-right">
+            <button onclick="window.location.href='/chat-interface'">RN-thinker-120B model</button>
+        </div>
+    </nav>
+
+    <main class="hero">
+        {% if mode == 'landing' %}
+            <h1 class="headline" id="breathing-headline">
+                Moving Beyond<br>
+                Static Conversations
+            </h1>
+            <div class="cta-container">
+                <a href="/chat-interface" class="cta-btn">
+                    <span class="dot"></span>
+                    RN-thinker-120B model ↗
+                </a>
+            </div>
+        {% else %}
+            <!-- Chat Interface UI -->
+            <div class="terminal-container" style="margin-top: 5rem; z-index: 10;">
+                <div class="terminal-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                    <span style="margin-left: 10px; font-size: 0.7rem; color: rgba(255,255,255,0.3); font-family: 'JetBrains Mono';">RN-thinker-120B-Terminal</span>
+                </div>
+                <div class="terminal-body">
+                    <div id="chat-box" style="height: 400px; overflow-y: auto;">
+                        {% for msg in history %}
+                            <div class="message user"><span>$</span> {{ msg.user_message }}</div>
+                            <div class="message bot"><span>></span> {{ msg.bot_response }}</div>
+                        {% endfor %}
+                        <div class="message bot"><span>></span> Computational pathways active. What complexity shall we solve today?</div>
+                    </div>
+                    <div class="input-area">
+                        <span>$</span>
+                        <input type="text" id="user-input" placeholder="Think beyond..." autocomplete="off">
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </main>
+
+    <footer class="bottom-nav">
+        <div class="down-arrow">↓</div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
