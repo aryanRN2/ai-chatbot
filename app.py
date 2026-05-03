@@ -111,7 +111,13 @@ def chat():
         return jsonify({"response": bot_response})
 
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        import traceback
+        error_details = traceback.format_exc()
+        print(f"CHAT ERROR: {error_details}")
+        return jsonify({
+            "error": str(e),
+            "details": "Check server logs or ensure API keys are correct."
+        }), 500
 
 if __name__ == '__main__':
     # When running locally
