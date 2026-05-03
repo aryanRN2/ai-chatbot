@@ -291,3 +291,15 @@ nav {
     width: 100%;
     outline: none;
 }
+
+.thinking-indicator {
+    font-style: italic;
+    color: var(--text-secondary) !important;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.4; }
+    50% { opacity: 1; }
+    100% { opacity: 0.4; }
+}

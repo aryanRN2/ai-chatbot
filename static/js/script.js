@@ -76,6 +76,13 @@ document.addEventListener('DOMContentLoaded', () => {
         appendMessage('user', message);
         userInput.value = '';
 
+        // Add Thinking Indicator
+        const thinkingDiv = document.createElement('div');
+        thinkingDiv.className = 'message bot thinking-indicator';
+        thinkingDiv.innerHTML = `<span>></span> Thinking...`;
+        chatBox.appendChild(thinkingDiv);
+        chatBox.scrollTop = chatBox.scrollHeight;
+
         try {
             const response = await fetch('/chat', {
                 method: 'POST',
@@ -84,13 +91,19 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             const data = await response.json();
+            
+            // Remove Thinking Indicator
+            thinkingDiv.remove();
+
             if (data.response) {
                 appendMessage('bot', data.response);
             } else if (data.error) {
                 appendMessage('bot', `Error: ${data.error}`);
             }
         } catch (error) {
-            appendMessage('bot', `Error: ${error.message}`);
+            thinkingDiv.remove();
+            appendMessage('bot', `Error: Connection failed. Please check your API keys in Vercel.`);
+            console.error('Chat Error:', error);
         }
     }
 
