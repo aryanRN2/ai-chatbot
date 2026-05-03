@@ -39,7 +39,8 @@ def get_ai_chain():
     
     # Prioritize NVIDIA if key is available
     if nvidia_key and nvidia_key != "your_nvidia_api_key_here":
-        llm = ChatNVIDIA(model="meta/llama-3.1-405b-instruct", nvidia_api_key=nvidia_key)
+        # Use 8b model for speed to stay within Vercel's 10s timeout limit
+        llm = ChatNVIDIA(model="meta/llama-3.1-8b-instruct", nvidia_api_key=nvidia_key)
     elif google_key and google_key != "your_google_api_key_here":
         llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", google_api_key=google_key)
     else:
