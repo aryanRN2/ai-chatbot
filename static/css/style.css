@@ -358,3 +358,61 @@ nav {
     50% { opacity: 1; }
     100% { opacity: 0.4; }
 }
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    nav {
+        padding: 1.5rem;
+    }
+    
+    .nav-links {
+        display: none; /* Hide secondary links on mobile */
+    }
+
+    .hero {
+        padding-left: 5vw;
+        padding-right: 5vw;
+        align-items: center;
+        text-align: center;
+    }
+
+    .headline {
+        font-size: 2.8rem;
+        letter-spacing: -1.5px;
+        margin-bottom: 2rem;
+    }
+
+    .cta-container {
+        justify-content: center;
+    }
+
+    .terminal-container {
+        width: 95%;
+        margin-top: 1rem;
+    }
+
+    .terminal-body {
+        padding: 1rem;
+        font-size: 0.85rem;
+    }
+
+    #chat-box {
+        height: 350px;
+    }
+
+    .bottom-nav {
+        padding: 0 1.5rem;
+        bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .headline {
+        font-size: 2.2rem;
+    }
+    
+    .terminal-header span {
+        display: none;
+    }
+}
+
