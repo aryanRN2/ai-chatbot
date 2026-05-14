@@ -3,15 +3,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const mode = document.body.getAttribute('data-mode') || 'landing';
     
     // --- Breathing & Light Logic ---
-    // (Old canvas logic removed in favor of Spline 3D background)
+    // --- Loading Logic ---
     const spline = document.getElementById('spline-bg');
-    if (spline) {
-        spline.addEventListener('load-complete', () => {
-            spline.classList.add('loaded');
-        });
-        // Fallback in case load-complete doesn't fire
-        setTimeout(() => spline.classList.add('loaded'), 3000);
+    const loadingScreen = document.getElementById('loading-screen');
+    
+    function hideLoadingScreen() {
+        if (spline) spline.classList.add('loaded');
+        if (loadingScreen) loadingScreen.classList.add('hidden');
     }
+
+    if (spline) {
+        spline.addEventListener('load-complete', hideLoadingScreen);
+        // Fallback in case load-complete doesn't fire within 5 seconds
+        setTimeout(hideLoadingScreen, 5000);
+    } else {
+        // If no spline element, hide loader immediately
+        hideLoadingScreen();
+    }
+
 
 
     // --- Chat Functionality ---

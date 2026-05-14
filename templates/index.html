@@ -8,6 +8,14 @@
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.92/build/spline-viewer.js"></script>
 </head>
 <body data-mode="{{ mode }}">
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <p>Initializing AI...</p>
+        </div>
+    </div>
+
     <!-- 3D Spline Background -->
     <spline-viewer id="spline-bg" url="https://prod.spline.design/gmSBqLSRGvxxEQ1O/scene.splinecode"></spline-viewer>
     <div class="bg-overlay"></div>

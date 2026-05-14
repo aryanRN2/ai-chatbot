@@ -202,8 +202,52 @@ nav {
     pointer-events: none;
 }
 
+/* Loading Screen */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-color);
+    z-index: 9999; /* Cover absolutely everything */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+}
+
+#loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loader-content {
+    text-align: center;
+    color: var(--accent-red);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 62, 62, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--accent-red);
+    animation: spin 1s ease-in-out infinite;
+    margin: 0 auto 15px auto;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
 
 #spline-bg.loaded {
+
     opacity: 1;
 }
 
