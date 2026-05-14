@@ -51,9 +51,7 @@ def get_ai_chain():
     You are a helpful AI assistant.
     
     Current conversation history:
-    {% for msg in history %}
-    {{ msg.type }}: {{ msg.content }}
-    {% endfor %}
+    {{ history }}
     
     User: {{ input }}
     Assistant:"""
@@ -90,10 +88,9 @@ def chat():
         db_history = ChatMessage.query.filter_by(session_id=session_id).order_by(ChatMessage.timestamp.asc()).all()
         
         # Format history for the prompt
-        formatted_history = []
+        formatted_history = ""
         for msg in db_history:
-            formatted_history.append({"type": "User", "content": msg.user_message})
-            formatted_history.append({"type": "Assistant", "content": msg.bot_response})
+            formatted_history += f"User: {msg.user_message}\nAssistant: {msg.bot_response}\n"
 
         # Get AI Response
         chain = get_ai_chain()

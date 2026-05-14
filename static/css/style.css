@@ -16,7 +16,7 @@
 }
 
 body {
-    background-color: var(--bg-color);
+    background-color: #000000; /* Fallback black */
     color: var(--text-primary);
     font-family: 'Inter', sans-serif;
     overflow: hidden;
@@ -93,6 +93,11 @@ nav {
     padding-left: 10vw;
     position: relative;
     z-index: 10;
+    pointer-events: none; /* Let mouse events pass to the robot */
+}
+
+.headline, .cta-container, .terminal-container, nav, .bottom-nav {
+    pointer-events: auto; /* Re-enable for the actual content */
 }
 
 .headline {
@@ -164,16 +169,25 @@ nav {
     color: var(--text-secondary);
 }
 
-/* Canvas Background */
-#glow-canvas {
+/* 3D Spline Background */
+#spline-bg {
     position: fixed;
     top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: auto; /* Allow the robot to see the mouse */
+    opacity: 0;
+    transition: opacity 1s ease-in; /* Smooth fade-in to hide initial black screen */
 }
+
+#spline-bg.loaded {
+    opacity: 1;
+}
+
+
+
 #send-btn {
     background: transparent;
     border: none;

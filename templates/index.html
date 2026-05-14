@@ -5,9 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aryan Ai | RN-ai</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.92/build/spline-viewer.js"></script>
 </head>
 <body data-mode="{{ mode }}">
-    <canvas id="glow-canvas"></canvas>
+    <!-- 3D Spline Background -->
+    <spline-viewer id="spline-bg" url="https://prod.spline.design/gmSBqLSRGvxxEQ1O/scene.splinecode"></spline-viewer>
+
+
+
+
+
+
 
     <nav>
         <div class="nav-left">

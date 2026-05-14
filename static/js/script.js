@@ -3,57 +3,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const mode = document.body.getAttribute('data-mode') || 'landing';
     
     // --- Breathing & Light Logic ---
-    const canvas = document.getElementById('glow-canvas');
-    if (canvas) {
-        const ctx = canvas.getContext('2d');
-        const headline = document.getElementById('breathing-headline');
-
-        let width, height;
-        function resize() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
-        }
-        window.addEventListener('resize', resize);
-        resize();
-
-        function render() {
-            ctx.clearRect(0, 0, width, height);
-            const breathingCycle = 8000; 
-            const phase = (Date.now() % breathingCycle) / breathingCycle;
-            const intensity = (Math.sin(phase * Math.PI * 2 - Math.PI / 2) + 1) / 2;
-
-            const gradient = ctx.createRadialGradient(
-                width * 1.0, height * 0.5, 0,
-                width * 1.0, height * 0.5, width * 0.9
-            );
-
-            const alpha = 0.4 + (intensity * 0.4);
-            
-            // LIGHT COLOR LOGIC
-            if (mode === 'chat') {
-                // RED LIGHTING for Chat mode
-                gradient.addColorStop(0, `rgba(255, 30, 30, ${alpha})`); 
-                gradient.addColorStop(0.4, `rgba(150, 0, 0, ${alpha * 0.4})`);
-            } else {
-                // GOLDEN LIGHTING for Landing mode
-                gradient.addColorStop(0, `rgba(238, 221, 136, ${alpha})`); 
-                gradient.addColorStop(0.4, `rgba(200, 120, 50, ${alpha * 0.4})`);
-            }
-            
-            gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
-
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, width, height);
-
-            if (headline) {
-                headline.style.opacity = 0.6 + (intensity * 0.4);
-            }
-            requestAnimationFrame(render);
-        }
-        render();
+    // (Old canvas logic removed in favor of Spline 3D background)
+    const spline = document.getElementById('spline-bg');
+    if (spline) {
+        spline.addEventListener('load-complete', () => {
+            spline.classList.add('loaded');
+        });
+        // Fallback in case load-complete doesn't fire
+        setTimeout(() => spline.classList.add('loaded'), 3000);
     }
+
 
     // --- Chat Functionality ---
     const chatBox = document.getElementById('chat-box');
