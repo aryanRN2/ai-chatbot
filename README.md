@@ -13,6 +13,18 @@ RN-ai is a cutting-edge, high-performance AI chatbot platform built to push the 
 - **Terminal-Style Interface**: A sleek, hacker-aesthetic chat interface designed for developers and power users.
 - **Serverless Optimized**: Fully configured for Vercel deployment with optimized response times.
 
+## 📸 Screenshots
+
+| Landing Page | Chat Interface |
+| :---: | :---: |
+| ![Landing Page](templates/pictures/image.png) | ![Chat Interface](templates/pictures/image%20copy.png) |
+
+### Landing Page
+The landing page features a high-fidelity 3D robot background that follows user interaction, setting the stage for a futuristic AI experience. It highlights the core mission: moving beyond static text to dynamic, immersive conversations.
+
+### Chat Interface
+The AI terminal provides a sleek, developer-focused environment. With glassmorphism effects and a command-line aesthetic, it offers a "hacker" feel while maintaining high usability and clear AI-user distinction.
+
 ## 🛠️ Tech Stack
 
 ### Backend
